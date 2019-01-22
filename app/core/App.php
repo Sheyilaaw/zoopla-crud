@@ -39,7 +39,8 @@ class App {
         }
         // Check if the route is in $Routes
         if (!in_array($url[0], $Routes)) {
-            die( 'Invalid route.' );
+            http_response_code(404);
+            die('Invalid route.');
         }
         return $url;
     }
