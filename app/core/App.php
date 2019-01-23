@@ -21,14 +21,16 @@ class App {
         $this->controller = new $this->controller;
 
         if($methodName) {
-            if(method_exists($this->controller, $methodName)) {
-                $this->method  = $methodName;
-                unset($url[1]);
+            if(!method_exists($this->controller, $methodName)) {
+                http_response_code(404);
+                die('Invalid route.');
             }
+            $this->method  = $methodName;
+            unset($url[1]);
         }
+        $params = $this->sanitizeParams(array_values($url));
 
-
-        $this->params = $url ? array_values($url) : [];
+        $this->params = $url ? $params : [];
         call_user_func_array([$this->controller,$this->method], $this->params);
     }
 
@@ -46,5 +48,16 @@ class App {
         }
         return $url;
     }
+
+    public function sanitizeParams($params) {
+        foreach ($params as $key => $param) {
+            if(preg_match('/[^a-z_\-0-9]/i', $param)){
+                unset($params[$key]);
+            }
+        }
+        return $params;
+    }
+
+
 
 }
