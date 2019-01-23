@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Zoopla Crud</a>
+            <a class="navbar-brand" href="../../">Zoopla Crud</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,6 +40,33 @@
             <h2> Show Listing </h2>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            Image
+            <img
+                width="400"
+                height="400"
+                class="img-responsive" alt="listing image"
+                src="<?php echo filter_var($data['thumbnail_url'], FILTER_VALIDATE_URL)
+                    ? $data['thumbnail_url'] : "../../public/listing_images_thumb/{$data['thumbnail_url']}"  ?>" >
+        </div>
+
+        <div class="col-md-8 col-md-offset-4">
+            Thumbnail
+            <img
+                width="150"
+                height="150"
+                class="img-responsive"
+                alt="listing image"
+                src="<?php echo filter_var($data['thumbnail_url'], FILTER_VALIDATE_URL)
+                    ? $data['thumbnail_url'] : "../../public/listing_images_thumb/{$data['thumbnail_url']}"  ?>"
+                >
+        </div>
+
+        <br>
+    </div>
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 

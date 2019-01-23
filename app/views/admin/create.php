@@ -164,7 +164,7 @@
     // Wait for the DOM to be ready
     $(function() {
         $("form[id='form-create']").validate({
-            /*// Specify validation rules
+            // Specify validation rules
             rules: {
                 county: "required",
                 country: "required",
@@ -199,7 +199,7 @@
                 },
                 property_type: "Property type is required",
                 status: "Status is required"
-            },*/
+            },
             submitHandler: function(form) {
                 form.submit();
             }
