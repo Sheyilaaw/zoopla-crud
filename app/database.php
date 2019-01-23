@@ -4,11 +4,11 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 $capsule = new Capsule();
 $capsule->addConnection([
-    'driver' => 'mysql',
-    'host' =>'127.0.0.1',
-    'username' => 'sheyi',
-    'password' => 'nbvhgfytrm',
-    'database' => 'zoopla',
+    'driver' => getenv('DB_CONNECTION'),
+    'host' =>getenv('DB_HOST'),
+    'username' => getenv('DB_USERNAME'),
+    'password' => getenv('DB_PASSWORD'),
+    'database' => getenv('DB_DATABASE'),
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix' => ''
