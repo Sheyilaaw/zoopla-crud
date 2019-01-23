@@ -11,7 +11,8 @@ final class PropertyTest extends TestCase {
 
     public function setUp() {
         //Load Env
-        require_once '../../boot.php';
+        $path = realpath(dirname(__FILE__))."\..\\..\\boot.php" ;
+        require_once $path;
         $this->area = 'Oxford';
         $this->api_key = getenv('API_KEY');
         $this->http = new GuzzleHttp\Client();
