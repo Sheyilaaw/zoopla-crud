@@ -12,10 +12,22 @@ class AdminController extends Controller {
     }
 
     public function create() {
-        $this->render('admin/create');
+        global $easyCSRF;
+        $token = $easyCSRF->generate('my_token');
+        $this->render('admin/create',[
+            'token' => $token
+        ]);
     }
 
     public function save() {
+        global $easyCSRF;
+        try {
+            $easyCSRF->check('my_token', $_POST['token']);
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }
+        unset($_POST['token']);
         $this->errors = [];
         $imageUrl = $this->uploadImage($_FILES['image_url']);
         $thumbUrl = $this->make_thumb(
@@ -38,11 +50,29 @@ class AdminController extends Controller {
     }
 
     public function edit($id=''){
-        $propertyListings = Property::find($id);
-        $this->render('admin/edit',$propertyListings);
+        if(is_numeric($id)){
+            global $easyCSRF;
+            $token = $easyCSRF->generate('my_token');
+            $propertyListings = Property::find($id);
+            $this->render('admin/edit',[
+                'token' => $token,
+                'listing' => $propertyListings
+            ]);
+        }else {
+            header('Location: ../index');
+            exit;
+        }
     }
 
     public function update() {
+        global $easyCSRF;
+        try {
+            $easyCSRF->check('my_token', $_POST['token']);
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }
+        unset($_POST['token']);
         $this->errors = [];
         $imageUrl = null;
         $thumbUrl = null;
@@ -107,15 +137,23 @@ class AdminController extends Controller {
     }
 
     public function show ($id = '') {
-        $propertyListings = Property::find($id);
-        $this->render('admin/show',$propertyListings);
+        if(is_numeric($id)){
+            $propertyListings = Property::find($id);
+            $this->render('admin/show',$propertyListings);
+        }
+        header('Location: ../index');
+        exit;
+
     }
 
     public function delete ($id = '') {
-        Property::destroy($id);
-        $_SESSION['success'] = 'Listing deleted successfully';
-        header('Location: ../admin/index');
-        exit;
+        if(is_numeric($id)){
+            Property::destroy($id);
+            $_SESSION['success'] = 'Listing deleted successfully';
+        }else{
+            header('Location: ../index');
+            exit;
+        }
     }
 
     private function make_thumb($image, $savePath) {

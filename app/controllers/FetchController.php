@@ -9,7 +9,7 @@ class FetchController extends Controller {
 
     public function __construct() {
         $this->area = 'Oxford';
-        $this->api_key = 'raqjr53tyfbdytqt8bc7r3h8';
+        $this->api_key = getenv('API_KEY');
     }
 
     public function index() {
