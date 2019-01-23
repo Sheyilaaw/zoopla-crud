@@ -34,20 +34,29 @@ class FetchController extends Controller {
             array_push($existingListingsArr,array_shift($existingListing));
         }
 
+        $listingsUpdated= 0;
+        $listingsAdded = 0;
+
         foreach ($listings as $listing) {
             if(count($existingListingsArr) <= 0) {
                 Property::create($listing);
+                $listingsAdded++;
             }
             else {
                 $listingId = $listing['listing_id'];
                 if(in_array($listingId, $existingListingsArr)) {
                     Property::updateOrCreate(['listing_id' => $listingId ], $listing );
+                    $listingsUpdated++;
                 }else {
                     Property::create($listing);
+                    $listingsAdded++;
                 }
             }
         }
-        $this->render('fetch/index');
+        $this->render('fetch/index',[
+            'listingsAdded' => $listingsAdded,
+            'listingsUpdated' => $listingsUpdated
+        ]);
     }
 
 }

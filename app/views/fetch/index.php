@@ -39,7 +39,10 @@
     <div class="row">
         <div class="text-center">
             <h1>Database Populated Successfully from Zoopla Api</h1>
+            <p><?php echo $data['listingsAdded']?> Listings Added</p>
+            <p><?php echo $data['listingsUpdated']?> Listings Updated</p>
         </div>
+
     </div>
 </div>
 
