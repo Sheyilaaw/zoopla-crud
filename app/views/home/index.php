@@ -27,6 +27,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="./fetch">Fetch Listings</a></li>
+                <li><a href="./admin/">Show Admin Listings</a></li>
                 <li><a href="./admin/create">Add Listings</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -49,11 +50,13 @@
                     <div class="col-md-6">
                         <div class="jumbotron">
                             <h4>Listing Id :<?php echo($listing->listing_id) ?></h4>
+
                             <h4>County :<?php echo($listing->county) ?></h4>
+
                             <h4>Town :<?php echo($listing->post_town) ?></h4>
-                            <p>
-                                <a class="btn btn-primary btn-lg" href="./admin/show/<?php echo $listing->id ?>" role="button">Learn more</a>
-                            </p>
+
+                            <a class="btn btn-success btn-lg" href="./admin/show/<?php echo $listing->id; ?>" role="button">Details</a>
+
                         </div>
                     </div>
                 <?php endforeach; ?>
