@@ -10,6 +10,7 @@
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "illuminate/database": "^5.7",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "ext-imagick": "*"
     }
 }

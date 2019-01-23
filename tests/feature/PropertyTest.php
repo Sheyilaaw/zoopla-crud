@@ -31,6 +31,13 @@ final class PropertyTest extends TestCase {
         $this->assertRegExp("/Database Populated Successfully from Zoopla Api/",(string) $response->getBody());
     }
 
+    public function testCanAddListings(): void {
+        $response = $this->http->request('GET', 'http://localhost/zoopla-crud/fetch');
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertRegExp("/Database Populated Successfully from Zoopla Api/",(string) $response->getBody());
+    }
+
+
     public function tearDown(): void {
         $this->http = null;
     }

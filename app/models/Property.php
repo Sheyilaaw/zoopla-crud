@@ -10,7 +10,7 @@ class Property extends Eloquent {
 
     protected $fillable = [
         'listing_id', 'county', 'country', 'post_town', 'description', 'details_url',
-        'displayable_address', 'image_url', 'thumbnail_url', 'latitude',
+        'displayable_address', 'image_url', 'thumbnail_url', 'latitude', 'out_code',
         'longitude', 'num_bedrooms' , 'num_bathrooms' , 'price',
         'property_type' , 'status'
     ];

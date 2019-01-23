@@ -18,6 +18,10 @@ class AdminController extends Controller {
     public function save() {
         $this->errors = [];
         $imageUrl = $this->uploadImage($_FILES['image_url']);
+        $thumbUrl = $this->make_thumb(
+            "./public/listing_images/{$imageUrl}",
+            './public/listing_images_thumb/'
+        );
         if (count($this->errors) > 0) {
             $_SESSION['errors'] = $this->errors;
             header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -26,6 +30,7 @@ class AdminController extends Controller {
         $data = $_POST;
         $data['listing_id'] = time();
         $data['image_url'] = $imageUrl;
+        $data['thumbnail_url'] =$thumbUrl;
         Property::create($data);
         $_SESSION['success'] = 'Listing added successfully';
         header('Location: ../admin/index');
@@ -39,8 +44,14 @@ class AdminController extends Controller {
 
     public function update() {
         $this->errors = [];
+        $imageUrl = null;
+        $thumbUrl = null;
         if($_FILES['image_url']['name']){
             $imageUrl = $this->uploadImage($_FILES['image_url']);
+            $thumbUrl = $this->make_thumb(
+                "./public/listing_images/{$imageUrl}",
+                './public/listing_images_thumb/'
+            );
         }
 
         if (count($this->errors) > 0) {
@@ -51,9 +62,12 @@ class AdminController extends Controller {
 
         $listing = $_POST;
 
-        $listing['image_url'] = $imageUrl;
-        $listingId = $listing['listing_id'];
+        if(!is_null($imageUrl)){
+            $listing['image_url'] = $imageUrl;
+            $listing['thumbnail_url'] = $thumbUrl;
+        }
 
+        $listingId = $listing['listing_id'];
 
         unset($listing['listing_id']);
         unset($listing['prev_image_url']);
@@ -104,11 +118,34 @@ class AdminController extends Controller {
         exit;
     }
 
-    public function imageResize($imageResourceId,$width,$height) {
-        $targetWidth =250;$targetHeight =250;
-        $targetLayer=imagecreatetruecolor($targetWidth,$targetHeight);
-        imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$targetWidth,$targetHeight, $width,$height);
-        return $targetLayer;
+    private function make_thumb($image, $savePath) {
+        $what = getimagesize($image);
+        $file_name = basename($image);
+        $ext   = pathinfo($file_name, PATHINFO_EXTENSION);
+
+        $file_name = basename($file_name, ".$ext") . '_thumb.' . $ext;
+
+        switch(strtolower($what['mime'])) {
+            case 'image/png':
+                $img = imagecreatefrompng($image);
+                $new = imagecreatetruecolor($what[0],$what[1]);
+                imagecopy($new,$img,0,0,0,0,$what[0],$what[1]);
+                break;
+            case 'image/jpeg':
+                $img = imagecreatefromjpeg($image);
+                $new = imagecreatetruecolor($what[0],$what[1]);
+                imagecopy($new,$img,0,0,0,0,$what[0],$what[1]);
+                break;
+            case 'image/gif':
+                $img = imagecreatefromgif($image);
+                $new = imagecreatetruecolor($what[0],$what[1]);
+                imagecopy($new,$img,0,0,0,0,$what[0],$what[1]);
+                break;
+            default: die();
+        }
+        imagejpeg($new,$savePath.$file_name);
+        imagedestroy($new);
+        return $file_name;
     }
 
 }
