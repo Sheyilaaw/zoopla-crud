@@ -2,8 +2,11 @@
 
 class HomeController extends Controller {
 
-    public function index($name = '') {
-        $this->render('home/index');
+    public function index() {
+        $propertyListings = Property::all();
+        $this->render('home/index', [
+            'listings' => $propertyListings
+        ]);
     }
 
 }
