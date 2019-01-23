@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Zoopla Crud</a>
+            <a class="navbar-brand" href="../../">Zoopla Crud</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,41 +56,43 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
+            <?php $listing = $data['listing']; ?>
+
             <form enctype="multipart/form-data" action="../../admin/update" method="post" id="form-edit">
 
                 <div class="form-group">
                     <label for="county">County</label>
-                    <input type="text" class="form-control" name="county" id="county" placeholder="County" value="<?php echo $data->county ?>">
+                    <input type="text" class="form-control" name="county" id="county" placeholder="County" value="<?php echo $listing->county ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text" class="form-control" name="country" placeholder="Country" value="<?php echo $data->country ?>">
+                    <input type="text" class="form-control" name="country" placeholder="Country" value="<?php echo $listing->country ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="country">Town</label>
-                    <input type="text" class="form-control" name="post_town" placeholder="Town" value="<?php echo $data->post_town ?>">
+                    <input type="text" class="form-control" name="post_town" placeholder="Town" value="<?php echo $listing->post_town ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="outcode">Post Code</label>
-                    <input type="text" class="form-control" name="out_code" id="out_code" placeholder="OX1" value="<?php echo $data->out_code ?>">
+                    <input type="text" class="form-control" name="out_code" id="out_code" placeholder="OX1" value="<?php echo $listing->out_code ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="15" cols="5"><?php echo $data->description?></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="15" cols="5"><?php echo $listing->description?></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="displayable_address">Displayable Address</label>
-                    <input type="text" class="form-control" id="displayable_address" name="displayable_address" value="<?php echo $data->displayable_address ?>" >
+                    <input type="text" class="form-control" id="displayable_address" name="displayable_address" value="<?php echo $listing->displayable_address ?>" >
                 </div>
 
                 <div class="form-group">
                     <label for="image_url">Image</label>
-                    <input type="hidden" id="prev_image_url" name="prev_image_url" value="<?php echo $data->image_url; ?>">
+                    <input type="hidden" id="prev_image_url" name="prev_image_url" value="<?php echo $listing->image_url; ?>">
                     <input type="file" id="image_url" name="image_url" class="form-control">
                 </div>
 
@@ -101,7 +103,7 @@
                         <?php for ($index=1 ; $index<16; $index++):  ?>
                             <option
                                 value="<?php echo $index; ?>"
-                                <?php echo $index == $data->num_bedrooms ? ' selected' : '' ?>
+                                <?php echo $index == $listing->num_bedrooms ? ' selected' : '' ?>
                             >
                                 <?php echo $index; ?>
 
@@ -117,7 +119,7 @@
                         <?php for ($index=1 ; $index<16; $index++):  ?>
                             <option
                                 value="<?php echo $index; ?>"
-                                <?php echo $index == $data->num_bathrooms ? ' selected' : '' ?>
+                                <?php echo $index == $listing->num_bathrooms ? ' selected' : '' ?>
                             >
                                 <?php echo $index; ?>
                             </option>
@@ -127,7 +129,7 @@
 
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" name="price" value="<?php echo $data->price; ?>">
+                    <input type="text" class="form-control" id="price" name="price" value="<?php echo $listing->price; ?>">
                 </div>
 
                 <div class="form-group">
@@ -138,7 +140,7 @@
                         <?php foreach ($propertyTypes as $propertyType):  ?>
                             <option
                                 value="<?php echo $propertyType; ?>"
-                                <?php echo $propertyType == $data->property_type ? ' selected' : '' ?>
+                                <?php echo $propertyType == $listing->property_type ? ' selected' : '' ?>
                             >
                                 <?php echo $propertyType; ?>
 
@@ -152,17 +154,18 @@
                     <label for="status">Select one status:</label>
                     <label>
                         <input type="radio" name="status" value="for_sale"
-                            <?php echo $data->status == 'for_sale' ? ' checked' : '' ?> >
+                            <?php echo $listing->status == 'for_sale' ? ' checked' : '' ?> >
                         For Sale
                     </label>
                     <label>
                         <input type="radio" name="status" value="for_rent"
-                            <?php echo $data->status == 'for_rent' ? ' checked' : '' ?> >
+                            <?php echo $listing->status == 'for_rent' ? ' checked' : '' ?> >
                         For Rent
                     </label>
                 </div>
 
-                <input type="hidden" name="listing_id" value="<?php echo $data->listing_id ?>">
+                <input type="hidden" name="listing_id" value="<?php echo $listing->listing_id ?>">
+                <input type="hidden" name="token" value="<?php echo $data['token'] ?>">
 
                 <button type="submit" class="btn btn-default">Submit</button>
 

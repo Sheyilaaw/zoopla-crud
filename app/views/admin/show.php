@@ -101,12 +101,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image_url">Image</label>
-                    <input type="hidden" id="prev_image_url" name="prev_image_url" value="<?php echo $data->image_url; ?>">
-                    <input type="file" id="image_url" name="image_url" class="form-control">
-                </div>
-
-                <div class="form-group">
                     <label for="num_bedrooms">Number of bedrooms</label>
                     <select name="num_bedrooms" id="num_bedrooms" class="form-control">
                         <option value="" disabled selected>Choose number of bedrooms</option>
@@ -174,9 +168,10 @@
                     </label>
                 </div>
 
-                <input type="hidden" name="listing_id" value="<?php echo $data->listing_id ?>">
+                <p>Created At : <?php echo date('l, F dS, Y H:i:s', strtotime($data->created_at)); ?> </p>
+                <p>Updated At : <?php echo date('l, F dS, Y H:i:s', strtotime($data->updated_at)) ?> </p>
 
-            <br><br>
+                <br><br>
 
         </div>
     </div>

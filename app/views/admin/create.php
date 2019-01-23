@@ -26,7 +26,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./fetch">Fetch Listings</a></li>
+                <li><a href="../fetch">Fetch Listings</a></li>
                 <li><a href="../admin/index">Show Listings</a></li>
                 <li><a href="../admin/create">Add Listings</a></li>
             </ul>
@@ -140,6 +140,8 @@
                         <input type="radio" name="status" value="for_rent"> For Rent
                     </label>
                 </div>
+
+                <input type="hidden" name="token" value="<?php echo $data['token']; ?>">
 
                 <button type="submit" class="btn btn-default">Submit</button>
 

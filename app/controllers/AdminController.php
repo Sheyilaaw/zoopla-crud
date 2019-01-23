@@ -140,20 +140,20 @@ class AdminController extends Controller {
         if(is_numeric($id)){
             $propertyListings = Property::find($id);
             $this->render('admin/show',$propertyListings);
+        } else {
+            header('Location: ../index');
+            exit;
         }
-        header('Location: ../index');
-        exit;
-
     }
 
     public function delete ($id = '') {
         if(is_numeric($id)){
             Property::destroy($id);
             $_SESSION['success'] = 'Listing deleted successfully';
-        }else{
-            header('Location: ../index');
-            exit;
         }
+        header('Location: ../index');
+        exit;
+
     }
 
     private function make_thumb($image, $savePath) {
