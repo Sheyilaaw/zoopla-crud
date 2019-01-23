@@ -10,8 +10,10 @@ final class PropertyTest extends TestCase {
     private $api_key;
 
     public function setUp() {
+        //Load Env
+        require_once '../../boot.php';
         $this->area = 'Oxford';
-        $this->api_key = 'raqjr53tyfbdytqt8bc7r3h8';
+        $this->api_key = getenv('API_KEY');
         $this->http = new GuzzleHttp\Client();
     }
 
@@ -30,13 +32,6 @@ final class PropertyTest extends TestCase {
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertRegExp("/Database Populated Successfully from Zoopla Api/",(string) $response->getBody());
     }
-
-    public function testCanAddListings(): void {
-        $response = $this->http->request('GET', 'http://localhost/zoopla-crud/fetch');
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertRegExp("/Database Populated Successfully from Zoopla Api/",(string) $response->getBody());
-    }
-
 
     public function tearDown(): void {
         $this->http = null;

@@ -13,10 +13,11 @@
             <directory>./tests/ui</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./app</directory>
-        </whitelist>
-    </filter>
-    p>
+
+    <testsuites>
+        <testsuite name="Property">
+            <directory>./tests/feature</directory>
+        </testsuite>
+    </testsuites>
+
 </phpunit>
