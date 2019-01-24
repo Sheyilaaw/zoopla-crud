@@ -62,37 +62,37 @@
 
                 <div class="form-group">
                     <label for="county">County</label>
-                    <input type="text" class="form-control" name="county" id="county" placeholder="County" value="<?php echo $listing->county ?>">
+                    <input type="text" class="form-control" name="county" id="county" placeholder="County" value="<?php echo htmlspecialchars($listing->county,ENT_QUOTES,'UTF-8'); ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text" class="form-control" name="country" placeholder="Country" value="<?php echo $listing->country ?>">
+                    <input type="text" class="form-control" name="country" placeholder="Country" value="<?php echo htmlspecialchars($listing->country,ENT_QUOTES,'UTF-8'); ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="country">Town</label>
-                    <input type="text" class="form-control" name="post_town" placeholder="Town" value="<?php echo $listing->post_town ?>">
+                    <input type="text" class="form-control" name="post_town" placeholder="Town" value="<?php echo htmlspecialchars($listing->post_town,ENT_QUOTES,'UTF-8') ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="outcode">Post Code</label>
-                    <input type="text" class="form-control" name="out_code" id="out_code" placeholder="OX1" value="<?php echo $listing->out_code ?>">
+                    <input type="text" class="form-control" name="out_code" id="out_code" placeholder="OX1" value="<?php echo htmlspecialchars($listing->out_code,ENT_QUOTES,'UTF-8'); ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="15" cols="5"><?php echo $listing->description?></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="15" cols="5"><?php echo htmlspecialchars($listing->description,ENT_QUOTES,'UTF-8'); ?></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="displayable_address">Displayable Address</label>
-                    <input type="text" class="form-control" id="displayable_address" name="displayable_address" value="<?php echo $listing->displayable_address ?>" >
+                    <input type="text" class="form-control" id="displayable_address" name="displayable_address" value="<?php echo htmlspecialchars($listing->displayable_address,ENT_QUOTES,'UTF-8'); ?>" >
                 </div>
 
                 <div class="form-group">
                     <label for="image_url">Image</label>
-                    <input type="hidden" id="prev_image_url" name="prev_image_url" value="<?php echo $listing->image_url; ?>">
+                    <input type="hidden" id="prev_image_url" name="prev_image_url" value="<?php echo htmlspecialchars($listing->image_url,ENT_QUOTES,'UTF-8'); ?>">
                     <input type="file" id="image_url" name="image_url" class="form-control">
                 </div>
 
@@ -103,7 +103,7 @@
                         <?php for ($index=1 ; $index<16; $index++):  ?>
                             <option
                                 value="<?php echo $index; ?>"
-                                <?php echo $index == $listing->num_bedrooms ? ' selected' : '' ?>
+                                <?php echo $index == htmlspecialchars($listing->num_bedrooms,ENT_QUOTES,'UTF-8') ? ' selected' : '' ?>
                             >
                                 <?php echo $index; ?>
 
@@ -119,7 +119,7 @@
                         <?php for ($index=1 ; $index<16; $index++):  ?>
                             <option
                                 value="<?php echo $index; ?>"
-                                <?php echo $index == $listing->num_bathrooms ? ' selected' : '' ?>
+                                <?php echo $index == htmlspecialchars($listing->num_bathrooms,ENT_QUOTES,'UTF-8') ? ' selected' : '' ?>
                             >
                                 <?php echo $index; ?>
                             </option>
@@ -129,7 +129,7 @@
 
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" name="price" value="<?php echo $listing->price; ?>">
+                    <input type="text" class="form-control" id="price" name="price" value="<?php echo htmlspecialchars($listing->price,ENT_QUOTES,'UTF-8'); ?>">
                 </div>
 
                 <div class="form-group">
@@ -140,7 +140,7 @@
                         <?php foreach ($propertyTypes as $propertyType):  ?>
                             <option
                                 value="<?php echo $propertyType; ?>"
-                                <?php echo $propertyType == $listing->property_type ? ' selected' : '' ?>
+                                <?php echo $propertyType == htmlspecialchars($listing->property_type,ENT_QUOTES,'UTF-8') ? ' selected' : '' ?>
                             >
                                 <?php echo $propertyType; ?>
 
@@ -154,12 +154,12 @@
                     <label for="status">Select one status:</label>
                     <label>
                         <input type="radio" name="status" value="for_sale"
-                            <?php echo $listing->status == 'for_sale' ? ' checked' : '' ?> >
+                            <?php echo htmlspecialchars($listing->status,ENT_QUOTES,'UTF-8') == 'for_sale' ? ' checked' : '' ?> >
                         For Sale
                     </label>
                     <label>
                         <input type="radio" name="status" value="for_rent"
-                            <?php echo $listing->status == 'for_rent' ? ' checked' : '' ?> >
+                            <?php echo htmlspecialchars($listing->status,ENT_QUOTES,'UTF-8') == 'for_rent' ? ' checked' : '' ?> >
                         For Rent
                     </label>
                 </div>
