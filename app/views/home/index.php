@@ -49,11 +49,11 @@
                 <?php foreach ($listings as $listing ): ?>
                     <div class="col-md-6">
                         <div class="jumbotron">
-                            <h4>Listing Id :<?php echo($listing->listing_id) ?></h4>
+                            <h4>Listing Id :<?php echo htmlspecialchars($listing->listing_id,ENT_QUOTES,'UTF-8'); ?></h4>
 
-                            <h4>County :<?php echo($listing->county) ?></h4>
+                            <h4>County :<?php echo htmlspecialchars($listing->country,ENT_QUOTES,'UTF-8'); ?></h4>
 
-                            <h4>Town :<?php echo($listing->post_town) ?></h4>
+                            <h4>Town :<?php echo htmlspecialchars($listing->post_town,ENT_QUOTES,'UTF-8'); ?> </h4>
 
                             <a class="btn btn-success btn-lg" href="./admin/show/<?php echo $listing->id; ?>" role="button">Details</a>
 
