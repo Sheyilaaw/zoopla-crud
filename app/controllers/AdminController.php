@@ -30,15 +30,15 @@ class AdminController extends Controller {
         unset($_POST['token']);
         $this->errors = [];
         $imageUrl = $this->uploadImage($_FILES['image_url']);
-        $thumbUrl = $this->make_thumb(
-            "./public/listing_images/{$imageUrl}",
-            './public/listing_images_thumb/'
-        );
         if (count($this->errors) > 0) {
             $_SESSION['errors'] = $this->errors;
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit;
         }
+        $thumbUrl = $this->make_thumb(
+            "./public/listing_images/{$imageUrl}",
+            './public/listing_images_thumb/'
+        );
         $data = $_POST;
         $data['listing_id'] = time();
         $data['image_url'] = $imageUrl;
@@ -78,18 +78,16 @@ class AdminController extends Controller {
         $thumbUrl = null;
         if($_FILES['image_url']['name']){
             $imageUrl = $this->uploadImage($_FILES['image_url']);
-            $thumbUrl = $this->make_thumb(
-                "./public/listing_images/{$imageUrl}",
-                './public/listing_images_thumb/'
-            );
         }
-
         if (count($this->errors) > 0) {
             $_SESSION['errors'] = $this->errors;
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit;
         }
-
+        $thumbUrl = $this->make_thumb(
+            "./public/listing_images/{$imageUrl}",
+            './public/listing_images_thumb/'
+        );
         $listing = $_POST;
 
         if(!is_null($imageUrl)){
